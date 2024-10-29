@@ -56,6 +56,11 @@ Rcpp::List LRMultiClass_c(const arma::mat& X, const arma::uvec& y, const arma::m
     return logLikelihood + regularization;
   };
   
+  // Calculate initial probabilities and objective
+  arma::mat prob_train = calculateProbs(X, beta);
+  objective(0) = calcObjective(prob_train, y, beta, lambda);
+  
+  
   // Newton's method cycle - implement the update EXACTLY numIter iterations
   
   
