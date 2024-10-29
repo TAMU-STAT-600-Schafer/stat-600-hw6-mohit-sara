@@ -50,8 +50,8 @@ MyKmeans <- function(X, K, M = NULL, numIter = 100){
   if(is.null(M)){
     M <- X[sample(1:n, K, replace = FALSE) , ]
   } else{
-    if(!is.matrix(M) || any(is.na(M)) || !all(is.numeric(M))) stop("M must be a numeric matrix without NA values.")
-    if(any(duplicated(M)) || nrow(M) != K || ncol(M) != ncol(X)) stop("M should have K unique rows and the same number of columns as X.")
+    if(!is.matrix(M) | any(is.na(M)) | !all(is.numeric(M))) stop("M must be a numeric matrix without NA values.")
+    if(any(duplicated(M)) | nrow(M) != K | ncol(M) != ncol(X)) stop("M should have K unique rows and the same number of columns as X.")
   }
   
   # Checks on numIter
