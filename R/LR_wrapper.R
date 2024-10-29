@@ -13,6 +13,14 @@
 #'
 #' @examples
 #' # Give example
+
+install.packages("Rcpp")
+install.packages("RcppArmadillo")
+library(Rcpp)
+library(RcppArmadillo)
+# Source the C++ code
+Rcpp::sourceCpp("C:/Users/saraa/Desktop/stat-600-hw6-mohit-sara/src/LRMultiClass.cpp")
+
 LRMultiClass <- function(X, y, numIter = 50, eta = 0.1, lambda = 1, beta_init = NULL){
   
   # Compatibility checks from HW3 and initialization of beta_init
