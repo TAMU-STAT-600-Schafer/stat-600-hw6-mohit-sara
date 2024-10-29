@@ -11,10 +11,8 @@
 #' @export
 #'
 #' @examples
-#' # Give example
-LRMultiClass <- function(X, y, numIter = 50, eta = 0.1, lambda = 1, beta_init = NULL){
-  
-  # Compatibility checks from HW3 and initialization of beta_init
+#' # Give exampleLRMultiClass <- function(X, y, numIter = 50, eta = 0.1, lambda = 1, beta_init = NULL) {
+LRMultiClass <- function(X, y, numIter = 50, eta = 0.1, lambda = 1, beta_init = NULL) {
   
   # Compatibility checks
   if (!all(X[, 1] == 1)) stop("First column of X must be all ones for intercept.")
@@ -31,9 +29,9 @@ LRMultiClass <- function(X, y, numIter = 50, eta = 0.1, lambda = 1, beta_init = 
     stop("Dimensions of beta_init are incompatible with X and y.")
   }
   
-  # Call C++ LRMultiClass_c function to implement the algorithm
-  out = LRMultiClass_c(X, y, numIter, eta, lambda, beta_init)
+  # Call the C++ function with the correct argument order
+  out <- LRMultiClass_c(X, y, beta_init, numIter, eta, lambda)
   
-  # Return the class assignments
+  # Return the result
   return(out)
 }
