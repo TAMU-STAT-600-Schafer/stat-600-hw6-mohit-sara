@@ -16,6 +16,16 @@ MyKmeans <- function(X, K, M = NULL, numIter = 100){
   
   n = nrow(X) # number of rows in X
   
+  # Checks on X
+  # To check if X is NULL
+  if(is.null(X)) stop(cat("X cannot be NULL."))
+  # No two rows of X can be identical
+  if(!all(dim(X) == dim(unique(X)))) stop(cat("X cannot have duplicate rows.\n"))
+  # No values of X can be NA
+  if(any(is.na(X))) stop(cat("No element of X can be NA.\n"))
+  # All elements of X should strictly be numeric
+  if(!all(is.numeric(X))) stop(cat("No element of X can be non-numeric.\n"))
+  
   # Checks on K
   # Checks the length of K
   if(!(length(K) == 1)) stop(cat("Length of K should be equal to 1.\n"))
