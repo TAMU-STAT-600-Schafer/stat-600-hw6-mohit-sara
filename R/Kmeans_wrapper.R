@@ -11,7 +11,20 @@
 #' @export
 #'
 #' @examples
-#' # Give example
+#' # Example usage of MyKmeans
+#' set.seed(928)
+#' X <- matrix(rnorm(50), nrow = 10, ncol = 5) # A (10 x 5) matrix
+#' K <- 3 # Number of clusters
+#' 
+#' # Executing MyKmeans with random initialization for a maximum of 100 iterations.
+#' Y <- MyKmeans(X = X, K = K)
+#' print(Y)
+#' 
+#' M <- matrix(rnorm(15), nrow = 3, ncol = 5) # A (3 x 5) matrix
+#' 
+#' # Executing MyKmeans with specified initialization for a maximum of 100 iterations.
+#' Y <- MyKmeans(X = X, K = K, M = M, numIter = 100)
+#' print(Y)
 MyKmeans <- function(X, K, M = NULL, numIter = 100){
   
   n = nrow(X) # number of rows in X
