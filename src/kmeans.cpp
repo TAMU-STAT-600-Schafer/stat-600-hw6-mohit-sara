@@ -45,7 +45,13 @@ arma::uvec MyKmeans_c(const arma::mat& X, int K,
       }
       
       for (int j = 0; j < K; j++) {
-        
+        if (count(j) > 0) {
+          // Calculate cluster means
+          M_temp.row(j) /= count(j);
+        } else {
+          // No points in cluster
+          Rcpp::stop("Error: Change the initialization for M.");
+        }
       }
     }
     
