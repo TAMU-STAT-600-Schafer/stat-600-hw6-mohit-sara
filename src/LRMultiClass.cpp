@@ -28,6 +28,10 @@ Rcpp::List LRMultiClass_c(const arma::mat& X, const arma::uvec& y, const arma::m
   arma::vec objective(numIter + 1); // to store objective values
   
   // Initialize anything else that you may need
+  // Initialize beta from the provided beta_init
+  arma::mat beta = beta_init;  
+  arma::vec objective(numIter + 1);  //Storing objective values
+  
   
   // Newton's method cycle - implement the update EXACTLY numIter iterations
   
