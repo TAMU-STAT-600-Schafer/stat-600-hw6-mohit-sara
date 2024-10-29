@@ -3,7 +3,10 @@ Type: Package
 Title: Homework Package with K-means and Multiclass Logistic Regression Algorithms
 Version: 1.0
 Date: 2024-10-28
-Author: Sara and Mohit
+Authors@R: c(
+    person("Sara", "Antonijevic", email = "saraant@tamu.edu", role = c("aut", "cre")),
+    person("Mohit", "Chhaparia", email = "mohit_chhaparia@tamu.edu", role = c("aut"))
+)  
 Maintainer: Sara Antonijevic <saraant@tamu.edu> 
 Description: 
 This package contains implementations of the K-means clustering algorithm and  
