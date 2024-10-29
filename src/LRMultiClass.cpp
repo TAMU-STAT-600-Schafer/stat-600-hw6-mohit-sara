@@ -1,10 +1,9 @@
-// -*- mode: C++; c-indent-level: 4; c-basic-offset: 4; indent-tabs-mode: nil; -*-
 
+// -*- mode: C++; c-indent-level: 4; c-basic-offset: 4; indent-tabs-mode: nil; -*-
 // we only include RcppArmadillo.h which pulls Rcpp.h in for us
 #include "RcppArmadillo.h"
 
-// via the depends attribute we tell Rcpp to create hooks for
-// RcppArmadillo so that the build process will know what to do
+// via the depends attribute we tell Rcpp to create hooks for RcppArmadillo
 //
 // [[Rcpp::depends(RcppArmadillo)]]
 
@@ -14,25 +13,19 @@
 // numIter - number of iterations, default 50
 // eta - damping parameter, default 0.1
 // lambda - ridge parameter, default 1
-// beta_init - p x K matrix of starting beta values (always supplied in right format)
+// beta_init - p x K matrix of starting beta values (always supplied in correct format)
+
 // [[Rcpp::export]]
 Rcpp::List LRMultiClass_c(const arma::mat& X, const arma::uvec& y, const arma::mat& beta_init,
-                          int numIter = 50, double eta = 0.1, double lambda = 1){
-  // All input is assumed to be correct
+                          int numIter = 50, double eta = 0.1, double lambda = 1) {
+  // Initialize parameters
+  int K = arma::max(y) + 1;  // Number of classes
+  int p = X.n_cols;           // Number of features
+  int n = X.n_rows;           // Number of data points
   
-  // Initialize some parameters
-  int K = max(y) + 1; // number of classes
-  int p = X.n_cols;
-  int n = X.n_rows;
-  arma::mat beta = beta_init; // to store betas and be able to change them if needed
-  arma::vec objective(numIter + 1); // to store objective values
-  
-  // Initialize anything else that you may need
-  // Initialize beta from the beta_init HW 3 reference
+  // Initialize beta from the provided beta_init
   arma::mat beta = beta_init;  
-  arma::vec objective(numIter + 1);  //Storing objective values
-  
-  
+  arma::vec objective(numIter + 1);  // Store objective values
   
   // Helper function to calculate probabilities
   auto calculateProbs = [](const arma::mat& X, const arma::mat& beta) {
@@ -60,8 +53,7 @@ Rcpp::List LRMultiClass_c(const arma::mat& X, const arma::uvec& y, const arma::m
   arma::mat prob_train = calculateProbs(X, beta);
   objective(0) = calcObjective(prob_train, y, beta, lambda);
   
-  
-  // Newton's method cycle - implement the update EXACTLY numIter iterations
+  // Newton's method cycle
   for (int t = 0; t < numIter; ++t) {
     for (int k = 0; k < K; ++k) {
       arma::vec Pk = prob_train.col(k);  // Extract column for class k
@@ -88,11 +80,6 @@ Rcpp::List LRMultiClass_c(const arma::mat& X, const arma::uvec& y, const arma::m
   }
   
   // Return results as a named list
-  return Rcpp::List::create(Rcpp::Named("beta") = beta,
-                            Rcpp::Named("objective") = objective);
-}
-  
-  // Create named list with betas and objective values
   return Rcpp::List::create(Rcpp::Named("beta") = beta,
                             Rcpp::Named("objective") = objective);
 }
