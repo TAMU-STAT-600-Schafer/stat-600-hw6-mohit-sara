@@ -36,6 +36,14 @@ arma::uvec MyKmeans_c(const arma::mat& X, int K,
       arma::mat M_temp = arma::zeros(K, p);
       // Count points in each cluster
       arma::uvec count = arma::zeros<arma::uvec>(K);
+      
+      for (int i = 0; i < n; i++) {
+        
+      }
+      
+      for (int j = 0; j < K; j++) {
+        
+      }
     }
     
     // Returns the vector of cluster assignments
