@@ -23,23 +23,13 @@ LRMultiClass <- function(X, y, numIter = 50, eta = 0.1, lambda = 1, beta_init = 
   if(!all(X[,1] == 1)){ #for X
     stop("First columns of X is not all ones")
   }
-  if(!all(Xt[,1] == 1)){ #for X transpose
-    stop("First columns of X is not all ones")
-  }
-  
   
   # Check for compatibility of dimensions between X and Y
   if(nrow(X) != length(y)){
     stop("Number of rows in X doesn't match lenght of Y")
   }
-  # Check for compatibility of dimensions between Xt and Yt
-  if(nrow(Xt) != length(yt)){
-    stop("Number of rows in Xt doesn't match lenght of Yt")
-  }
-  # Check for compatibility of dimensions between X and Xt
-  if (ncol(X) != ncol(Xt)) {
-    stop("The number of columns in X and Xt do not match.")
-  }
+  
+  
   # Check eta is positive
   if(eta<= 0){
     stop("Eta must be positive")
