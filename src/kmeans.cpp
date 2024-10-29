@@ -53,6 +53,17 @@ arma::uvec MyKmeans_c(const arma::mat& X, int K,
           Rcpp::stop("Error: Change the initialization for M.");
         }
       }
+      
+      // Check for convergence
+      if (arma::approx_equal(M_temp, M, "absdiff", 1e-8)) {
+        Rcpp::Rcout << "Converged after " << iter + 1 << " iterations.\n";
+        break;
+      }
+      
+      // Update centroids and norms
+      M = M_temp;
+      M_norm = arma::sum(arma::square(M), 1);
+      
     }
     
     // Returns the vector of cluster assignments
