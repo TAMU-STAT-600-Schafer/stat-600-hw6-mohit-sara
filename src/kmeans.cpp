@@ -19,6 +19,8 @@ arma::uvec MyKmeans_c(const arma::mat& X, int K,
     arma::uvec Y(n); // to store cluster assignments
     
     // Initialize any additional parameters if needed
+    arma::vec X_norm = arma::sum(arma::square(X), 1); // row norms of X
+    arma::vec M_norm = arma::sum(arma::square(M), 1); // row norms of M
     
     // For loop with kmeans algorithm
     
