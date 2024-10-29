@@ -38,7 +38,10 @@ arma::uvec MyKmeans_c(const arma::mat& X, int K,
       arma::uvec count = arma::zeros<arma::uvec>(K);
       
       for (int i = 0; i < n; i++) {
-        
+        // Collect points in cluster
+        M_temp.row(Y(i)) += X.row(i);
+        // Increment count for this cluster
+        count(Y(i))++;
       }
       
       for (int j = 0; j < K; j++) {
