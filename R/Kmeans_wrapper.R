@@ -24,6 +24,16 @@ MyKmeans <- function(X, K, M = NULL, numIter = 100){
     if(any(duplicated(M)) || nrow(M) != K || ncol(M) != ncol(X)) stop("M should have K unique rows and the same number of columns as X.")
   }
   
+  # Checks on numIter
+  # Checks the length of numIter
+  if(!(length(numIter) == 1)) stop(cat("Length of number of iterations (numIter) should be equal to 1.\n"))
+  # Check if numIter contains NA or NULL or is not numeric
+  if(is.null(numIter) | is.na(numIter) | !is.numeric(numIter)) stop(cat("Number of iterations (numIter) should strictly be a positive integer greater than 1.\n"))
+  # Checks if numIter is a positive integer greater than 1
+  if(!((round(numIter, 0) == numIter) & (numIter > 1))) stop(cat("Number of iterations (numIter) should strictly be a positive integer greater than 1.\n"))
+  # Checks if numIter is a matrix
+  if(is.matrix(numIter)) numIter <- as.vector(numIter)
+  
   # Call C++ MyKmeans_c function to implement the algorithm
   Y = MyKmeans_c(X, K, M, numIter)
   
