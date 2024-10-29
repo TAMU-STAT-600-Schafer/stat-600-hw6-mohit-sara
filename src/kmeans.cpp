@@ -24,7 +24,18 @@ arma::uvec MyKmeans_c(const arma::mat& X, int K,
     
     // For loop with kmeans algorithm
     for (int iter = 0; iter < numIter; iter++) {
+      // Calculating squared Euclidean distance between each point and centroid
+      arma::mat dist = arma::repmat(X_norm, 1, K) + arma::repmat(M_norm.t(), n, 1) - 2 * X * M.t();
       
+      // Assign each data point to the nearest cluster
+      // Closest centroid index for each point
+      Y = arma::index_min(dist, 1);
+      
+      // Update centroids
+      // Temporary matrix to store new centroids
+      arma::mat M_temp = arma::zeros(K, p);
+      // Count points in each cluster
+      arma::uvec count = arma::zeros<arma::uvec>(K);
     }
     
     // Returns the vector of cluster assignments
