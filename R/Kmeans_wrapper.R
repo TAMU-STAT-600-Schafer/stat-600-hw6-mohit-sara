@@ -17,6 +17,16 @@ MyKmeans <- function(X, K, M = NULL, numIter = 100){
   n = nrow(X) # number of rows in X
   
   # Checks on X
+  # Check to ensure X is a matrix or a dataframe
+  if(!is.matrix(X)){
+    if(!is.data.frame(X)){
+      stop("X should be a matrix or a data frame.")
+    }else{
+      X <- as.matrix(X)
+    }
+  }
+  # Check to ensure X isn't empty
+  if(nrow(X) == 0 | ncol(X) == 0) stop("X must be a non-empty matrix.")
   # To check if X is NULL
   if(is.null(X)) stop(cat("X cannot be NULL."))
   # No two rows of X can be identical
