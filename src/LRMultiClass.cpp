@@ -28,10 +28,23 @@ Rcpp::List LRMultiClass_c(const arma::mat& X, const arma::uvec& y, const arma::m
   arma::vec objective(numIter + 1); // to store objective values
   
   // Initialize anything else that you may need
-  // Initialize beta from the provided beta_init
+  // Initialize beta from the beta_init HW 3 reference
   arma::mat beta = beta_init;  
   arma::vec objective(numIter + 1);  //Storing objective values
   
+  
+  
+  // Helper function to calculate probabilities
+  auto calculateProbs = [](const arma::mat& X, const arma::mat& beta) {
+    arma::mat linearComb = X * beta;  // n x K matrix
+    arma::vec maxVals = arma::max(linearComb, 1);  // Max value per row (n x 1)
+    
+    // Subtract row-wise maximum for numerical stability
+    linearComb.each_col() -= maxVals;
+    
+    arma::mat expXB = arma::exp(linearComb);  // Exponentiate each element
+    return expXB.each_col() / arma::sum(expXB, 1);  // Normalize by row sums
+  };
   
   // Newton's method cycle - implement the update EXACTLY numIter iterations
   
