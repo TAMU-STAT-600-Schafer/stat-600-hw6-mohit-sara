@@ -38,6 +38,13 @@ Rcpp::List LRMultiClass_c(const arma::mat& X, const arma::uvec& y, const arma::m
     };
     
     
+    // Helper function to calculate the objective value
+    auto calcObjective = [&](const arma::mat& P, const arma::uvec& y) {
+      arma::vec logLikelihood = arma::log(P(arma::linspace<arma::uvec>(0, n - 1, n), y));
+      double regularization = (lambda / 2) * arma::accu(arma::square(beta));
+      return -arma::accu(logLikelihood) + regularization;
+    };
+    
     
     // Newton's method cycle - implement the update EXACTLY numIter iterations
     
