@@ -46,6 +46,12 @@ Rcpp::List LRMultiClass_c(const arma::mat& X, const arma::uvec& y, const arma::m
     };
     
     
+    // Initialize probabilities and objective value
+    arma::mat prob_train = calculateProbs(X, beta);
+    objective(0) = calcObjective(prob_train, y);
+    
+    
+    
     // Newton's method cycle - implement the update EXACTLY numIter iterations
     
     
