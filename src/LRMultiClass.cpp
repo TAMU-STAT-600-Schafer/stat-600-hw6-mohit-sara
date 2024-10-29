@@ -46,6 +46,16 @@ Rcpp::List LRMultiClass_c(const arma::mat& X, const arma::uvec& y, const arma::m
     return expXB.each_col() / arma::sum(expXB, 1);  // Normalize by row sums
   };
   
+  // Helper function to calculate the objective (regularized log-likelihood)
+  auto calcObjective = [&](const arma::mat& P, const arma::uvec& y, const arma::mat& beta, double lambda) {
+    double logLikelihood = 0;
+    for (int i = 0; i < n; ++i) {
+      logLikelihood -= std::log(P(i, y(i)) + 1e-10);  // Add epsilon to avoid log(0)
+    }
+    double regularization = 0.5 * lambda * arma::accu(beta % beta);  // Ridge penalty
+    return logLikelihood + regularization;
+  };
+  
   // Newton's method cycle - implement the update EXACTLY numIter iterations
   
   
