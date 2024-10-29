@@ -23,7 +23,9 @@ arma::uvec MyKmeans_c(const arma::mat& X, int K,
     arma::vec M_norm = arma::sum(arma::square(M), 1); // row norms of M
     
     // For loop with kmeans algorithm
-    
+    for (int iter = 0; iter < numIter; iter++) {
+      
+    }
     
     // Returns the vector of cluster assignments
     return(Y);
