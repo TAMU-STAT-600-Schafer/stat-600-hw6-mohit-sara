@@ -1,8 +1,8 @@
 Package: GroupHW
 Type: Package
-Title: What the package does (short line)
+Title: Group Project on Kmeans and Multiclass Logistic Regression in R
 Version: 1.0
-Date: 2020-10-17
+Date: 2024-10-29
 Author: Who wrote it
 Maintainer: Who to complain to <yourfault@somewhere.net>
 Description: More about what it does (maybe more than one line)
