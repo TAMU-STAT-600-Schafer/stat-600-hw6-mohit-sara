@@ -29,6 +29,16 @@ Rcpp::List LRMultiClass_c(const arma::mat& X, const arma::uvec& y, const arma::m
     
     // Initialize anything else that you may need
     
+    // Helper function to calculate class probabilities using softmax
+    auto calculateProbs = [](const arma::mat& X, const arma::mat& beta) {
+      arma::mat linearComb = X * beta;
+      linearComb.each_row() -= arma::max(linearComb, 1);  // For numerical stability
+      arma::mat expXB = arma::exp(linearComb);
+      return expXB.each_col() / arma::sum(expXB, 1);  // Softmax normalization
+    };
+    
+    
+    
     // Newton's method cycle - implement the update EXACTLY numIter iterations
     
     
