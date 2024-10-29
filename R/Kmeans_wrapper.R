@@ -16,6 +16,16 @@ MyKmeans <- function(X, K, M = NULL, numIter = 100){
   
   n = nrow(X) # number of rows in X
   
+  # Checks on K
+  # Checks the length of K
+  if(!(length(K) == 1)) stop(cat("Length of K should be equal to 1.\n"))
+  # Check if K contains NA or NULL or is not numeric
+  if(is.null(K) | is.na(K) | !is.numeric(K)) stop(cat("K should strictly be a positive integer greater than 1.\n"))
+  # Checks if K is a positive integer greater than 1
+  if(!((round(K, 0) == K) & (K > 1))) stop(cat("K should strictly be a positive integer greater than 1.\n"))
+  # Checks if K is a matrix
+  if(is.matrix(K)) K <- as.vector(K)
+  
   # Check whether M is NULL or not. If NULL, initialize based on K random points from X. If not NULL, check for compatibility with X dimensions.
   if(is.null(M)){
     M <- X[sample(1:n, K, replace = FALSE) , ]
