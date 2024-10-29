@@ -54,6 +54,34 @@ Rcpp::List LRMultiClass_c(const arma::mat& X, const arma::uvec& y, const arma::m
     
     // Newton's method cycle - implement the update EXACTLY numIter iterations
     
+    for (int t = 0; t < numIter; ++t) {
+      for (int k = 0; k < K; ++k) {
+        arma::vec Pk = prob_train.col(k);  // Probabilities for class k
+        arma::vec indicator = (y == k);    // Indicator vector for class k
+        
+        // Calculate gradient
+        arma::vec gradient = X.t() * (Pk - indicator) + lambda * beta.col(k);
+        
+        // Diagonal weight matrix Wk (diagonal stored as a vector)
+        arma::vec WkDiag = Pk % (1 - Pk);
+        
+        // Hessian matrix for class k
+        arma::mat hessian = X.t() * (X.each_col() % WkDiag) + lambda * arma::eye(p, p);
+        
+        // Solving linear system for the update step (currently trying to avoid matrix inversion)
+        arma::vec deltaBeta = arma::solve(hessian, gradient);
+        
+        // Damped Newton update
+        beta.col(k) -= eta * deltaBeta;
+      }
+      
+      // Recalculate probabilities after beta update
+      prob_train = calculateProbs(X, beta);
+      
+      // Update objective function
+      objective(t + 1) = calcObjective(prob_train, y);
+    }
+    
     
     // Create named list with betas and objective values
     return Rcpp::List::create(Rcpp::Named("beta") = beta,
