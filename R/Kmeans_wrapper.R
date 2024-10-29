@@ -17,7 +17,12 @@ MyKmeans <- function(X, K, M = NULL, numIter = 100){
   n = nrow(X) # number of rows in X
   
   # Check whether M is NULL or not. If NULL, initialize based on K random points from X. If not NULL, check for compatibility with X dimensions.
-  
+  if(is.null(M)){
+    M <- X[sample(1:n, K, replace = FALSE) , ]
+  } else{
+    if(!is.matrix(M) || any(is.na(M)) || !all(is.numeric(M))) stop("M must be a numeric matrix without NA values.")
+    if(any(duplicated(M)) || nrow(M) != K || ncol(M) != ncol(X)) stop("M should have K unique rows and the same number of columns as X.")
+  }
   
   # Call C++ MyKmeans_c function to implement the algorithm
   Y = MyKmeans_c(X, K, M, numIter)
