@@ -1,11 +1,13 @@
-#' Title
+#' K-means Clustering using Rcpp and Armadillo
 #'
-#' @param X 
-#' @param K 
-#' @param M 
-#' @param numIter 
+#' @param X A numeric matrix with 'n' rows representing data points and 'p' columns representing features.
+#' @param K An integer specifying the number of clusters (must be greater than 1).
+#' @param M (Optional) A numeric matrix of initial cluster centers with 'K' rows and 'p' columns. 
+#'          If 'NULL', 'K' random rows from 'X' are selected as initial centroids.
+#' @param numIter An integer specifying the maximum number of iterations. Default is 100.
 #'
-#' @return Explain return
+#' @return A vector of length 'n' with cluster assignments for each data point. 
+#'         Each element in the returned vector corresponds to the assigned cluster (0-indexed) for the respective data point.
 #' @export
 #'
 #' @examples
