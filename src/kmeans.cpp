@@ -19,13 +19,14 @@ arma::uvec MyKmeans_c(const arma::mat& X, int K,
     arma::uvec Y(n); // to store cluster assignments
     
     // Initialize any additional parameters if needed
+    arma::mat M_copy = M; // A copy of M since it is a constant variable
     arma::vec X_norm = arma::sum(arma::square(X), 1); // row norms of X
-    arma::vec M_norm = arma::sum(arma::square(M), 1); // row norms of M
+    arma::vec M_norm = arma::sum(arma::square(M_copy), 1); // row norms of M
     
     // For loop with kmeans algorithm
     for (int iter = 0; iter < numIter; iter++) {
       // Calculating squared Euclidean distance between each point and centroid
-      arma::mat dist = arma::repmat(X_norm, 1, K) + arma::repmat(M_norm.t(), n, 1) - 2 * X * M.t();
+      arma::mat dist = arma::repmat(X_norm, 1, K) + arma::repmat(M_norm.t(), n, 1) - 2 * X * M_copy.t();
       
       // Assign each data point to the nearest cluster
       // Closest centroid index for each point
@@ -55,14 +56,14 @@ arma::uvec MyKmeans_c(const arma::mat& X, int K,
       }
       
       // Check for convergence
-      if (arma::approx_equal(M_temp, M, "absdiff", 1e-8)) {
+      if (arma::approx_equal(M_temp, M_copy, "absdiff", 1e-8)) {
         Rcpp::Rcout << "Converged after " << iter + 1 << " iterations.\n";
         break;
       }
       
       // Update centroids and norms
-      M = M_temp;
-      M_norm = arma::sum(arma::square(M), 1);
+      M_copy = M_temp;
+      M_norm = arma::sum(arma::square(M_copy), 1);
       
     }
     
