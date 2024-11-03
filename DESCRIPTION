@@ -8,7 +8,7 @@ Authors@R:
     person("Chhaparia", "Mohit", , "mohit_chhaparia@tamu.edu", role = "aut"))
 Maintainer: Sara Antonijevic <saraant@tamu.edu>
 Description: This package provides implementations of K-means clustering and multiclass logistic regression using both R and C++. It showcases a collaborative work in  GitHub space, incorporating Rcpp and RcppArmadillo for efficient C++ integration. 
-License: What license is it under?
+License: MIT + file LICENSE
 Imports: Rcpp (>= 1.0.5)
 LinkingTo: Rcpp, RcppArmadillo
 RoxygenNote: 7.1.1
