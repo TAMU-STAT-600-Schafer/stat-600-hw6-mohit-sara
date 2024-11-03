@@ -11,8 +11,9 @@ Description: This package provides implementations of K-means clustering and mul
 License: MIT + file LICENSE
 Imports: Rcpp (>= 1.0.5)
 LinkingTo: Rcpp, RcppArmadillo
-RoxygenNote: 7.1.1
+RoxygenNote: 7.3.2
 Encoding: UTF-8
 Suggests: 
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    microbenchmark
 Config/testthat/edition: 3
