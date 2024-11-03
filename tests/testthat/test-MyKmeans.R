@@ -23,12 +23,12 @@ test_that("Test 3: MyKmeans Function works!", {
 })
 
 test_that("Test 4: MyKmeans Function works!", {
-  time <- microbenchmark(
+  time <- suppressWarnings(microbenchmark(
     MyKmeans(X, K, M1, numIter),
     MyKmeans(X, K, M2, numIter),
     MyKmeans(X, K, M = NULL, numIter),
     times = 10
-  )
+  ))
   expect_equal(length(time$time), 30)
   expect_equal(dim(time), c(30, 2))
 })
