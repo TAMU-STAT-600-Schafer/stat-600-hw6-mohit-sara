@@ -32,3 +32,9 @@ test_that("Test 4: MyKmeans Function works!", {
   expect_equal(length(time$time), 30)
   expect_equal(dim(time), c(30, 2))
 })
+
+test_that("Test 5: MyKmeans Function throws error due to non-numeric element in X!", {
+  X1 <- X
+  X1[5000, 223] <- 'a'
+  expect_error(MyKmeans(X1, K, M1, numIter))
+})
