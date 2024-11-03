@@ -15,3 +15,9 @@ test_that("Test 2: MyKmeans Function works!", {
   expect_equal(length(Y_MyKmeans_WithM2), nrow(X))
   expect_equal(length(unique(Y_MyKmeans_WithM2)), nrow(M2))
 })
+
+test_that("Test 3: MyKmeans Function works!", {
+  Y_MyKmeans_WithoutM <- MyKmeans(X, K, M = NULL, numIter)
+  expect_equal(length(Y_MyKmeans_WithoutM), nrow(X))
+  expect_equal(length(unique(Y_MyKmeans_WithoutM)), K)
+})
