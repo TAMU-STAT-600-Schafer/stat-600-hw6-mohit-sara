@@ -33,8 +33,15 @@ test_that("Test 4: MyKmeans Function works!", {
   expect_equal(dim(time), c(30, 2))
 })
 
-test_that("Test 5: MyKmeans Function throws error due to non-numeric element in X!", {
+test_that("Test 5: MyKmeans Function throws error due to incorrect inputs for X!", {
   X1 <- X
   X1[5000, 223] <- 'a'
   expect_error(MyKmeans(X1, K, M1, numIter))
+  expect_error(MyKmeans(X[ , 1:128], K, M1, numIter))
+})
+
+test_that("Test 6: MyKmeans Function throws error due to incorrect inputs for K!", {
+  expect_error(MyKmeans(X, matrix(1:2, 1), M1, numIter))
+  expect_error(MyKmeans(X, rep(NA, 1), M1, numIter))
+  expect_error(MyKmeans(X, K = 1.23, M1, numIter))
 })
