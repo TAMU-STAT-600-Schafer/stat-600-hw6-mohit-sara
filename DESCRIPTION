@@ -3,8 +3,10 @@ Type: Package
 Title: Group Project on Kmeans and Multiclass Logistic Regression in R
 Version: 1.0
 Date: 2024-10-29
-Author: Sara Antonijevic (LR) and Mohit Chhaparia (K-means)
-Maintainer: saraant@tamu.edu
+Authors@R: 
+    c(person("Antonijevic", "Sara", , "saraant@tamu.edu", role = c("cre", "aut")),
+    person("Chhaparia", "Mohit", , "mohit_chhaparia@tamu.edu", role = "aut"))
+Maintainer: Sara Antonijevic <saraant@tamu.edu>
 Description: This package provides implementations of K-means clustering and multiclass logistic regression using both R and C++. It showcases a collaborative work in  GitHub space, incorporating Rcpp and RcppArmadillo for efficient C++ integration. 
 License: What license is it under?
 Imports: Rcpp (>= 1.0.5)
