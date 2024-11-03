@@ -4,9 +4,14 @@ M2 <- matrix(rnorm(15 * 256, 1, 3), nrow = 15)
 K <- 15
 numIter <- 100
 
-test_that("Function works!", {
+test_that("Test 1: MyKmeans Function works!", {
   Y_MyKmeans_WithM1 <- MyKmeans(X, K, M1, numIter)
   expect_equal(length(Y_MyKmeans_WithM1), nrow(X))
   expect_equal(length(unique(Y_MyKmeans_WithM1)), K)
 })
 
+test_that("Test 2: MyKmeans Function works!", {
+  Y_MyKmeans_WithM2 <- MyKmeans(X, K, M2, numIter)
+  expect_equal(length(Y_MyKmeans_WithM2), nrow(X))
+  expect_equal(length(unique(Y_MyKmeans_WithM2)), nrow(M2))
+})
