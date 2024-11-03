@@ -2,25 +2,40 @@
 % Please edit documentation in R/Kmeans_wrapper.R
 \name{MyKmeans}
 \alias{MyKmeans}
-\title{Title}
+\title{K-means Clustering using Rcpp and Armadillo}
 \usage{
 MyKmeans(X, K, M = NULL, numIter = 100)
 }
 \arguments{
-\item{X}{}
+\item{X}{A numeric matrix with 'n' rows representing data points and 'p' columns representing features.}
 
-\item{K}{}
+\item{K}{An integer specifying the number of clusters (must be greater than 1).}
 
-\item{M}{}
+\item{M}{(Optional) A numeric matrix of initial cluster centers with 'K' rows and 'p' columns. 
+If 'NULL', 'K' random rows from 'X' are selected as initial centroids.}
 
-\item{numIter}{}
+\item{numIter}{An integer specifying the maximum number of iterations. Default is 100.}
 }
 \value{
-Explain return
+A vector of length 'n' with cluster assignments for each data point. 
+        Each element in the returned vector corresponds to the assigned cluster (0-indexed) for the respective data point.
 }
 \description{
-Title
+K-means Clustering using Rcpp and Armadillo
 }
 \examples{
-# Give example
+# Example usage of MyKmeans
+set.seed(928)
+X <- matrix(rnorm(50), nrow = 10, ncol = 5) # A (10 x 5) matrix
+K <- 3 # Number of clusters
+
+# Executing MyKmeans with random initialization for a maximum of 100 iterations.
+Y <- MyKmeans(X = X, K = K)
+print(Y)
+
+M <- matrix(rnorm(15), nrow = 3, ncol = 5) # A (3 x 5) matrix
+
+# Executing MyKmeans with specified initialization for a maximum of 100 iterations.
+Y <- MyKmeans(X = X, K = K, M = M, numIter = 100)
+print(Y)
 }

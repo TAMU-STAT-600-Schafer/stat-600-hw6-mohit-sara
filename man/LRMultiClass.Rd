@@ -19,12 +19,6 @@ LRMultiClass(X, y, numIter = 50, eta = 0.1, lambda = 1, beta_init = NULL)
 
 \item{beta_init}{}
 }
-\value{
-
-}
 \description{
 Title
-}
-\examples{
-# Give example
 }
