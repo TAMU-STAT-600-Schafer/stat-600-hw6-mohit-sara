@@ -5,7 +5,13 @@ K <- 15
 numIter <- 100
 
 test_that("Test 1: MyKmeans_c Function works!", {
-  Y_MyKmeans_WithM3 <- MyKmeans(X, K, M3, numIter)
+  Y_MyKmeans_WithM3 <- MyKmeans_c(X, K, M3, numIter)
   expect_equal(length(Y_MyKmeans_WithM3), nrow(X))
   expect_equal(length(unique(Y_MyKmeans_WithM3)), K)
+})
+
+test_that("Test 1: MyKmeans_c Function works!", {
+  Y_MyKmeans_WithM4 <- MyKmeans_c(X, K, M4, numIter)
+  expect_equal(length(Y_MyKmeans_WithM4), nrow(X))
+  expect_equal(length(unique(Y_MyKmeans_WithM4)), nrow(M4))
 })
