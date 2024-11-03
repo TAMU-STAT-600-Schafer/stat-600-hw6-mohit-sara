@@ -21,3 +21,14 @@ test_that("Test 3: MyKmeans Function works!", {
   expect_equal(length(Y_MyKmeans_WithoutM), nrow(X))
   expect_equal(length(unique(Y_MyKmeans_WithoutM)), K)
 })
+
+test_that("Test 4: MyKmeans Function works!", {
+  time <- microbenchmark(
+    MyKmeans(X, K, M1, numIter),
+    MyKmeans(X, K, M2, numIter),
+    MyKmeans(X, K, M = NULL, numIter),
+    times = 10
+  )
+  expect_equal(length(time$time), 30)
+  expect_equal(dim(time), c(30, 2))
+})
