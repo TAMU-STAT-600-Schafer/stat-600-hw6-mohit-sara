@@ -52,4 +52,10 @@ test_that("Test 7: MyKmeans Function throws error due to incorrect inputs for M!
   expect_error(MyKmeans(X, K, 1:(15 * 256), numIter))
 })
 
+test_that("Test 8: MyKmeans Function throws error due to incorrect inputs for numIter!", {
+  expect_error(MyKmeans(X, K, M1, NA))
+  expect_error(MyKmeans(X, K, M1, -7))
+  expect_error(MyKmeans(X, K, M1, 0))
+})
+
 
