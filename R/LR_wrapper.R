@@ -25,38 +25,26 @@
 #' beta <- LRMultiClass(X, y, numIter = 100, eta = 0.05, lambda = 0.1)
 #' print(beta)
 #'
+#'
+#'
+
+Rcpp::sourceCpp("C:/Users/saraa/Desktop/stat-600-hw6-mohit-sara/src/LRMultiClass.cpp")
 LRMultiClass <- function(X, y, numIter = 50, eta = 0.1, lambda = 1, beta_init = NULL) {
   
-  # Compatibility checks with diagnostic prints
-  if (!is.matrix(X)) stop("X must be a matrix.")
+  # Compatibility checks
   if (!all(X[, 1] == 1)) stop("First column of X must be all ones for intercept.")
   if (nrow(X) != length(y)) stop("Number of rows in X must match length of y.")
   if (eta <= 0) stop("Learning rate (eta) must be positive.")
   if (lambda < 0) stop("Regularization parameter (lambda) must be non-negative.")
   
-  # Ensure y is an integer vector and starts from 0
-  y <- as.integer(y)
-  if (min(y) != 0) stop("Class labels in y should start from 0.")
-  
-  # Determine the number of classes (K) and features (p)
+  # Initialize beta_init if NULL
   K <- length(unique(y))  # Number of classes
   p <- ncol(X)            # Number of features (including intercept)
-  
-  # Initialize beta_init if NULL
   if (is.null(beta_init)) {
     beta_init <- matrix(0, nrow = p, ncol = K)
   } else if (nrow(beta_init) != p || ncol(beta_init) != K) {
     stop("Dimensions of beta_init are incompatible with X and y.")
   }
-  
-  # Print diagnostic information for debugging
-  cat("Dimensions of X:", dim(X), "\n")
-  cat("Length of y:", length(y), "\n")
-  cat("Dimensions of beta_init:", dim(beta_init), "\n")
-  cat("Number of classes (K):", K, "\n")
-  cat("Number of iterations (numIter):", numIter, "\n")
-  cat("Learning rate (eta):", eta, "\n")
-  cat("Regularization parameter (lambda):", lambda, "\n")
   
   # Call the C++ function with the correct argument order
   out <- LRMultiClass_c(X, y, beta_init, numIter, eta, lambda)
@@ -64,3 +52,12 @@ LRMultiClass <- function(X, y, numIter = 50, eta = 0.1, lambda = 1, beta_init = 
   # Return the result
   return(out)
 }
+
+# Define a sample dataset
+X <- cbind(1, matrix(rnorm(100 * 4), nrow = 100))  # Add intercept column
+y <- as.integer(runif(100, 0, 3))  # 3 classes, integers 0, 1, 2
+beta_init <- matrix(0, nrow = ncol(X), ncol = length(unique(y)))  # Initialize beta
+
+# Run the function
+result <- LRMultiClass(X, y, beta_init = beta_init)
+print(result)
