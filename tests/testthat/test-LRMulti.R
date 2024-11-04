@@ -1,5 +1,3 @@
-Rcpp::sourceCpp("C:/Users/saraa/Desktop/stat-600-hw6-mohit-sara/src/LRMultiClass.cpp")
-source("C:/Users/saraa/Desktop/stat-600-hw6-mohit-sara/R/LR_wrapper.R")
 # Run test with only beta returned
 test_that("Test with only beta returned", {
   X <- cbind(1, matrix(rnorm(100 * 4), nrow = 100))
