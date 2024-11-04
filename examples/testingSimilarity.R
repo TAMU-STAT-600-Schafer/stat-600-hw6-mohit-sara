@@ -4,7 +4,7 @@ Rcpp::sourceCpp("C:/Users/saraa/Desktop/stat-600-hw6-mohit-sara/src/LRMultiClass
 source("C:/Users/saraa/Desktop/stat-600-hw6-mohit-sara/R/LR_wrapper.R")
 
 
-source("C:/Users/saraa/Desktop/stat-600-hw6-mohit-sara/testingLR/LRMulticlassO.R")
+source("C:/Users/saraa/Desktop/stat-600-hw6-mohit-sara/examples/LRMulticlassO.R")
 
 library(Rcpp)
 library(RcppArmadillo)

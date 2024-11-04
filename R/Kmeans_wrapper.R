@@ -28,8 +28,8 @@
 #' 
 #' 
 #' #' # Edge-case examples
-#' # Single-cluster case (K = 1)
-#' Y <- MyKmeans(X = X, K = 1)
+#' # Single-cluster case (K = 2)
+#' Y <- MyKmeans(X = X, K = 2)
 #' print(Y)
 MyKmeans <- function(X, K, M = NULL, numIter = 100){
   

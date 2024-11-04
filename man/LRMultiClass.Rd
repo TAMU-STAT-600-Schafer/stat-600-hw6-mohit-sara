@@ -31,11 +31,11 @@ This function performs multiclass logistic regression using gradient descent.
 It supports regularization and requires a properly formatted design matrix.
 }
 \examples{
-# Example usage:
-# Assume X is a matrix with observations and features, and y is a vector of class labels
 X <- matrix(c(1, 1, 1, 1, 1, 2, 3, 4, 5, 6), ncol = 2)  # Add an intercept column (all ones)
-y <- c(1, 2, 1, 2, 1)  # Class labels
+y <- c(0, 1, 0, 1, 0)  # Adjusted class labels to start from 0
 beta <- LRMultiClass(X, y, numIter = 100, eta = 0.05, lambda = 0.1)
 print(beta)
+
+
 
 }

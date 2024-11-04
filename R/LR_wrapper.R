@@ -18,16 +18,13 @@
 #' @export
 #'
 #' @examples
-#' # Example usage:
-#' # Assume X is a matrix with observations and features, and y is a vector of class labels
 #' X <- matrix(c(1, 1, 1, 1, 1, 2, 3, 4, 5, 6), ncol = 2)  # Add an intercept column (all ones)
-#' y <- c(1, 2, 1, 2, 1)  # Class labels
+#' y <- c(0, 1, 0, 1, 0)  # Adjusted class labels to start from 0
 #' beta <- LRMultiClass(X, y, numIter = 100, eta = 0.05, lambda = 0.1)
 #' print(beta)
 #'
 #'
 #'
-
 LRMultiClass <- function(X, y, numIter = 50, eta = 0.1, lambda = 1, beta_init = NULL) {
   
   # Check to ensure y does not have any NAs or non-numeric values.
@@ -70,12 +67,3 @@ LRMultiClass <- function(X, y, numIter = 50, eta = 0.1, lambda = 1, beta_init = 
   # Return the result
   return(out)
 }
-
-# Define a sample dataset
-X <- cbind(1, matrix(rnorm(100 * 4), nrow = 100))  # Add intercept column
-y <- as.integer(runif(100, 0, 3))  # 3 classes, integers 0, 1, 2
-beta_init <- matrix(0, nrow = ncol(X), ncol = length(unique(y)))  # Initialize beta
-
-# Run the function
-result <- LRMultiClass(X, y, beta_init = beta_init)
-print(result)

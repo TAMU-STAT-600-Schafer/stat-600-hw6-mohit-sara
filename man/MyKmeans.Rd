@@ -38,4 +38,10 @@ M <- matrix(rnorm(15), nrow = 3, ncol = 5) # A (3 x 5) matrix
 # Executing MyKmeans with specified initialization for a maximum of 100 iterations.
 Y <- MyKmeans(X = X, K = K, M = M, numIter = 100)
 print(Y)
+
+
+#' # Edge-case examples
+# Single-cluster case (K = 2)
+Y <- MyKmeans(X = X, K = 2)
+print(Y)
 }

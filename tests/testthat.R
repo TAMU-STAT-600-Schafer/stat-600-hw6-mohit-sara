@@ -8,5 +8,6 @@
 
 library(testthat)
 library(GroupHW)
+library(microbenchmark)
 
 test_check("GroupHW")

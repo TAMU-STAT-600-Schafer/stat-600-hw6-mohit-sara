@@ -1,4 +1,5 @@
 #general test
+
 test_that("LRMultiClass_c Function converges and returns correct output", {
   X <- matrix(rnorm(100 * 5), nrow = 100)
   y <- as.integer(runif(100) * 3)  # 3 classes
