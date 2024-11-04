@@ -60,8 +60,8 @@ Rcpp::List LRMultiClass_c(const arma::mat& X, const arma::uvec& y, const arma::m
   }
   
   // Debug output
-  Rcpp::Rcout << "Beta dimensions: " << beta.n_rows << " x " << beta.n_cols << std::endl;
-  Rcpp::Rcout << "Objective length: " << objective.size() << std::endl;
+  //Rcpp::Rcout << "Beta dimensions: " << beta.n_rows << " x " << beta.n_cols << std::endl;
+  //Rcpp::Rcout << "Objective length: " << objective.size() << std::endl;
   
   // Testing return of each component
   Rcpp::NumericMatrix betaR = Rcpp::wrap(beta);
