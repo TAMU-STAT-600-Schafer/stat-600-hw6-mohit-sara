@@ -31,6 +31,13 @@
 Rcpp::sourceCpp("C:/Users/saraa/Desktop/stat-600-hw6-mohit-sara/src/LRMultiClass.cpp")
 LRMultiClass <- function(X, y, numIter = 50, eta = 0.1, lambda = 1, beta_init = NULL) {
   
+  # Check to ensure y does not have any NAs or non-numeric values.
+  if(any(is.na(y)) | !all(is.numeric(y))) stop("All elements of y should be numeric.")
+  # Check to ensure y is not an empty vector
+  if(length(y) == 0) stop("y must be a non-empty vector.")
+  # Check to ensure y contains values from 0 to K-1
+  if(any(y < 0) | any(y >= length(unique(y)))) stop("y must contain class labels from 0 to K - 1.")
+  
   # Compatibility checks
   if (!all(X[, 1] == 1)) stop("First column of X must be all ones for intercept.")
   if (nrow(X) != length(y)) stop("Number of rows in X must match length of y.")
