@@ -34,9 +34,13 @@ LRMultiClass <- function(X, y, numIter = 50, eta = 0.1, lambda = 1, beta_init = 
   # Compatibility checks
   if (!all(X[, 1] == 1)) stop("First column of X must be all ones for intercept.")
   if (nrow(X) != length(y)) stop("Number of rows in X must match length of y.")
+  
   # Check to ensure eta is not NA or non-numeric
   if(is.na(eta) | !is.numeric(eta) | length(eta) != 1 | is.infinite(eta)) stop("eta must be a single positive number.")
   if (eta <= 0) stop("Learning rate (eta) must be positive.")
+  
+  # Check to ensure lambda is not NA or non-numeric
+  if(is.na(lambda) | !is.numeric(lambda) | length(lambda) != 1 | is.infinite(lambda)) stop("lambda must be a single non-negative number.")
   if (lambda < 0) stop("Regularization parameter (lambda) must be non-negative.")
   
   # Initialize beta_init if NULL
