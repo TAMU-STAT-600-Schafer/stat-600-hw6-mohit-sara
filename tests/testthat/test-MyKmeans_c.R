@@ -10,7 +10,7 @@ test_that("Test 1: MyKmeans_c Function works!", {
   expect_equal(length(unique(Y_MyKmeans_WithM3)), K)
 })
 
-test_that("Test 1: MyKmeans_c Function works!", {
+test_that("Test 2: MyKmeans_c Function works!", {
   Y_MyKmeans_WithM4 <- MyKmeans_c(X, K, M4, numIter)
   expect_equal(length(Y_MyKmeans_WithM4), nrow(X))
   expect_equal(length(unique(Y_MyKmeans_WithM4)), nrow(M4))
