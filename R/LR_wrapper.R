@@ -46,6 +46,12 @@ LRMultiClass <- function(X, y, numIter = 50, eta = 0.1, lambda = 1, beta_init = 
     stop("Dimensions of beta_init are incompatible with X and y.")
   }
   
+  # Check to ensure numIter is not NA or non-numeric
+  if(is.na(numIter) | !is.numeric(numIter)) stop("numIter must be a single positive integer.")
+  # Check if numIter is a single positive integer
+  if(length(numIter) != 1 | numIter <= 0 | numIter != as.integer(numIter)) stop(" numIter must be a positive integer.")
+  
+  
   # Call the C++ function with the correct argument order
   out <- LRMultiClass_c(X, y, beta_init, numIter, eta, lambda)
   
