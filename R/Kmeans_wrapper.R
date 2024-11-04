@@ -25,6 +25,12 @@
 #' # Executing MyKmeans with specified initialization for a maximum of 100 iterations.
 #' Y <- MyKmeans(X = X, K = K, M = M, numIter = 100)
 #' print(Y)
+#' 
+#' 
+#' #' # Edge-case examples
+#' # Single-cluster case (K = 1)
+#' Y <- MyKmeans(X = X, K = 1)
+#' print(Y)
 MyKmeans <- function(X, K, M = NULL, numIter = 100){
   
   n = nrow(X) # number of rows in X
@@ -41,13 +47,13 @@ MyKmeans <- function(X, K, M = NULL, numIter = 100){
   # Check to ensure X isn't empty
   if(nrow(X) == 0 | ncol(X) == 0) stop("X must be a non-empty matrix.")
   # To check if X is NULL
-  if(is.null(X)) stop(cat("X cannot be NULL."))
+  if(is.null(X)) stop("X cannot be NULL.")
   # No two rows of X can be identical
-  if(!all(dim(X) == dim(unique(X)))) stop(cat("X cannot have duplicate rows.\n"))
+  if(!all(dim(X) == dim(unique(X)))) stop("X cannot have duplicate rows.")
   # No values of X can be NA
-  if(any(is.na(X))) stop(cat("No element of X can be NA.\n"))
+  if(any(is.na(X))) stop("No element of X can be NA.")
   # All elements of X should strictly be numeric
-  if(!all(is.numeric(X))) stop(cat("No element of X can be non-numeric.\n"))
+  if(!all(is.numeric(X))) stop("All elements of X must be numeric.")
   
   # Checks on K
   # Checks the length of K
