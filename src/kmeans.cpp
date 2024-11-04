@@ -26,6 +26,7 @@ arma::uvec MyKmeans_c(const arma::mat& X, int K,
     // For loop with kmeans algorithm
     for (int iter = 0; iter < numIter; iter++) {
       // Calculating squared Euclidean distance between each point and centroid
+      // Using norms of rows of X and M to optimize the distance calculation
       arma::mat dist = arma::repmat(X_norm, 1, K) + arma::repmat(M_norm.t(), n, 1) - 2 * X * M_copy.t();
       
       // Assign each data point to the nearest cluster
@@ -33,6 +34,8 @@ arma::uvec MyKmeans_c(const arma::mat& X, int K,
       Y = arma::index_min(dist, 1);
       
       // Update centroids
+      // Update the centroids by calculating the mean of all points assigned to each cluster
+     
       // Temporary matrix to store new centroids
       arma::mat M_temp = arma::zeros(K, p);
       // Count points in each cluster
@@ -55,7 +58,7 @@ arma::uvec MyKmeans_c(const arma::mat& X, int K,
         }
       }
       
-      // Check for convergence
+      // Check for convergence: if centroid positions haven't changed beyond a threshold, stop the loop
       if (arma::approx_equal(M_temp, M_copy, "absdiff", 1e-8)) {
         Rcpp::Rcout << "Converged after " << iter + 1 << " iterations.\n";
         break;
