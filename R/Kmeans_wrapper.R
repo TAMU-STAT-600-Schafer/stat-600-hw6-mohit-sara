@@ -57,11 +57,11 @@ MyKmeans <- function(X, K, M = NULL, numIter = 100){
   
   # Checks on K
   # Checks the length of K
-  if(!(length(K) == 1)) stop(cat("Length of K should be equal to 1.\n"))
+  if(!(length(K) == 1)) stop("Length of K should be equal to 1.\n")
   # Check if K contains NA or NULL or is not numeric
-  if(is.null(K) | is.na(K) | !is.numeric(K)) stop(cat("K should strictly be a positive integer greater than 1.\n"))
+  if(is.null(K) | is.na(K) | !is.numeric(K)) stop("K should strictly be a positive integer greater than 1.\n")
   # Checks if K is a positive integer greater than 1
-  if(!((round(K, 0) == K) & (K > 1))) stop(cat("K should strictly be a positive integer greater than 1.\n"))
+  if(!((round(K, 0) == K) & (K > 1))) stop("K should strictly be a positive integer greater than 1.\n")
   # Checks if K is a matrix
   if(is.matrix(K)) K <- as.vector(K)
   
@@ -75,11 +75,11 @@ MyKmeans <- function(X, K, M = NULL, numIter = 100){
   
   # Checks on numIter
   # Checks the length of numIter
-  if(!(length(numIter) == 1)) stop(cat("Length of number of iterations (numIter) should be equal to 1.\n"))
+  if(!(length(numIter) == 1)) stop("Length of number of iterations (numIter) should be equal to 1.\n")
   # Check if numIter contains NA or NULL or is not numeric
-  if(is.null(numIter) | is.na(numIter) | !is.numeric(numIter)) stop(cat("Number of iterations (numIter) should strictly be a positive integer greater than 1.\n"))
+  if(is.null(numIter) | is.na(numIter) | !is.numeric(numIter)) stop("Number of iterations (numIter) should strictly be a positive integer greater than 1.\n")
   # Checks if numIter is a positive integer greater than 1
-  if(!((round(numIter, 0) == numIter) & (numIter > 1))) stop(cat("Number of iterations (numIter) should strictly be a positive integer greater than 1.\n"))
+  if(!((round(numIter, 0) == numIter) & (numIter > 1))) stop("Number of iterations (numIter) should strictly be a positive integer greater than 1.\n")
   # Checks if numIter is a matrix
   if(is.matrix(numIter)) numIter <- as.vector(numIter)
   
