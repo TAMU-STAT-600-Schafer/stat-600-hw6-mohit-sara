@@ -28,7 +28,6 @@
 #'
 #'
 
-Rcpp::sourceCpp("C:/Users/saraa/Desktop/stat-600-hw6-mohit-sara/src/LRMultiClass.cpp")
 LRMultiClass <- function(X, y, numIter = 50, eta = 0.1, lambda = 1, beta_init = NULL) {
   
   # Check to ensure y does not have any NAs or non-numeric values.
