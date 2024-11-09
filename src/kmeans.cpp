@@ -53,14 +53,14 @@ arma::uvec MyKmeans_c(const arma::mat& X, int K,
         count(Y(i))++;
       }
       
+      if (arma::any(count == 0)) {
+        // No points in cluster
+        Rcpp::stop("Error: Change the initialization for M.");
+      }
+      
       for (int j = 0; j < K; j++) {
-        if (count(j) > 0) {
-          // Calculate cluster means
-          M_temp.row(j) /= count(j);
-        } else {
-          // No points in cluster
-          Rcpp::stop("Error: Change the initialization for M.");
-        }
+        // Calculate cluster means
+        M_temp.row(j) /= count(j);
       }
       
       // Check for convergence: if centroid positions haven't changed beyond a threshold, stop the loop
