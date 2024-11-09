@@ -76,7 +76,7 @@ arma::uvec MyKmeans_c(const arma::mat& X, int K,
       
       // Print that the algorithm could not converge if the for loop has reached the 
       // maximum number of iterations (numIter).
-      //if (iter == (numIter - 1)) Rcpp::Rcout << "The algorithm did not converge in " << numIter << " iterations.\n";
+      if (iter == (numIter - 1)) Rcpp::Rcout << "The algorithm did not converge in " << numIter << " iterations.\n";
     }
     
     // Returns the vector of cluster assignments
