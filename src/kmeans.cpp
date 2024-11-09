@@ -64,8 +64,7 @@ arma::uvec MyKmeans_c(const arma::mat& X, int K,
       }
       
       // Check for convergence: if centroid positions haven't changed beyond a threshold, stop the loop
-      double centroid_change = arma::accu(arma::square(M_copy - M_temp));
-      if (centroid_change < 1e-8) {
+      if (arma::accu(arma::abs(M_copy - M_temp)) < 1e-8) {
         Rcpp::Rcout << "Converged after " << iter + 1 << " iterations.\n";
         break;
       }
