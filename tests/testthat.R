@@ -9,5 +9,6 @@
 library(testthat)
 library(GroupHW)
 library(microbenchmark)
+require(fossil)
 
 test_check("GroupHW")
