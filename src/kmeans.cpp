@@ -23,6 +23,8 @@ arma::uvec MyKmeans_c(const arma::mat& X, int K,
     arma::vec X_norm = arma::sum(arma::square(X), 1); // row norms of X
     arma::vec M_norm = arma::sum(arma::square(M_copy), 1); // row norms of M
     arma::mat dist(n, K); // Preallocating distance matrix
+    arma::mat M_temp(K, p);
+    arma::vec count(K);
     
     // For loop with kmeans algorithm
     for (int iter = 0; iter < numIter; iter++) {
@@ -38,9 +40,11 @@ arma::uvec MyKmeans_c(const arma::mat& X, int K,
       // Update the centroids by calculating the mean of all points assigned to each cluster
      
       // Temporary matrix to store new centroids
-      arma::mat M_temp = arma::zeros(K, p);
+      //arma::mat M_temp = arma::zeros(K, p);
+      M_temp.zeros();
       // Count points in each cluster
-      arma::uvec count = arma::zeros<arma::uvec>(K);
+      //arma::uvec count = arma::zeros<arma::uvec>(K);
+      count.zeros();
       
       for (int i = 0; i < n; i++) {
         // Collect points in cluster
@@ -60,7 +64,8 @@ arma::uvec MyKmeans_c(const arma::mat& X, int K,
       }
       
       // Check for convergence: if centroid positions haven't changed beyond a threshold, stop the loop
-      if (arma::approx_equal(M_temp, M_copy, "absdiff", 1e-8)) {
+      double centroid_change = arma::accu(arma::square(M_copy - M_temp));
+      if (centroid_change < 1e-8) {
         Rcpp::Rcout << "Converged after " << iter + 1 << " iterations.\n";
         break;
       }
@@ -71,7 +76,7 @@ arma::uvec MyKmeans_c(const arma::mat& X, int K,
       
       // Print that the algorithm could not converge if the for loop has reached the 
       // maximum number of iterations (numIter).
-      if (iter == (numIter - 1)) Rcpp::Rcout << "The algorithm did not converge in " << numIter << " iterations.\n";
+      //if (iter == (numIter - 1)) Rcpp::Rcout << "The algorithm did not converge in " << numIter << " iterations.\n";
     }
     
     // Returns the vector of cluster assignments
