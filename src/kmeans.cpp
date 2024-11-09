@@ -22,12 +22,13 @@ arma::uvec MyKmeans_c(const arma::mat& X, int K,
     arma::mat M_copy = M; // A copy of M since it is a constant variable
     arma::vec X_norm = arma::sum(arma::square(X), 1); // row norms of X
     arma::vec M_norm = arma::sum(arma::square(M_copy), 1); // row norms of M
+    arma::mat dist(n, K); // Preallocating distance matrix
     
     // For loop with kmeans algorithm
     for (int iter = 0; iter < numIter; iter++) {
       // Calculating squared Euclidean distance between each point and centroid
       // Using norms of rows of X and M to optimize the distance calculation
-      arma::mat dist = arma::repmat(X_norm, 1, K) + arma::repmat(M_norm.t(), n, 1) - 2 * X * M_copy.t();
+      dist = arma::repmat(X_norm, 1, K) + arma::repmat(M_norm.t(), n, 1) - 2 * X * M_copy.t();
       
       // Assign each data point to the nearest cluster
       // Closest centroid index for each point
