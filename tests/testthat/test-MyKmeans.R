@@ -58,4 +58,10 @@ test_that("Test 8: MyKmeans Function throws error due to incorrect inputs for nu
   expect_error(MyKmeans(X, K, M1, 0))
 })
 
+test_that("Test 9: Accuracy Test (Rand Index)!", {
+  Y_MyKmeans_WithM1 <- MyKmeans(X, K, M1, numIter)
+  Y_kmeans <- kmeans(X, M1, numIter)[[1]]
+  expect_true(rand.index(Y_MyKmeans_WithM1, Y_kmeans) > 0.8)
+})
+
 
